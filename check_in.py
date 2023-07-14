@@ -8,8 +8,8 @@ import requests
 
 class CheckIn(object):
     client = requests.Session()
-    login_url = "https://w1.v2free.net/auth/login"
-    sign_url = "https://w1.v2free.net/user/checkin"
+    login_url = "https://w1.v2free.top/auth/login"
+    sign_url = "https://w1.v2free.top/user/checkin"
 
     def __init__(self, username, password):
         self.username = username
@@ -40,7 +40,7 @@ class CheckIn(object):
 
         headers = {
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
-            "Referer": "https://w1.v2free.net/user",
+            "Referer": "https://w1.v2free.top/user",
         }
         response = self.client.post(self.sign_url, headers=headers)
 
