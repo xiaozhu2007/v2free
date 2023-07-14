@@ -1,21 +1,13 @@
 # This is a basic workflow to help you get started with Actions
 
-name: V2FreeSignIn
+name: V2FreeCheckIn
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
-  # push:
-  #   branches: [ "main" ]
-  # pull_request:
-  #   branches: [ "main" ]
-
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-  watch:
-    types: [ started ]
   schedule:
-    - cron: '7 16 * * *'
+    - cron: '23 3 * * *'
 
 permissions:
   actions: write
@@ -29,21 +21,15 @@ permissions:
   security-events: write
   statuses: write
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  sign-in:
-    # The type of runner that the job will run on
-    # Steps represent a sequence of tasks that will be executed as part of the job
+  check-in:
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v3
 
-    - name: Install Python
-      run: |
-        sudo apt update && \
-        sudo apt install python3
+    - name: Setup Python
+      uses: actions/setup-python@v4.7.0
       
     - name: requirements
       run: |
@@ -81,14 +67,14 @@ jobs:
 
         for ((i=0;i<$user_num;i++))
         do
-        python3 auto_sign_in.py --username ${user_list[$i]} --password ${pwd_list[$i]}
+        python3 check_in.py --username ${user_list[$i]} --password ${pwd_list[$i]}
         done
-    - name: Commit
+    - name: Commit files
       run: |
-        git config --global user.email buaaxxx1995@gmail.com
-        git config --global user.name xxx
+        git config --global user.email 3356136957@qq.com
+        git config --global user.name 签到机器人
         git add .
-        git commit -m "Update flow.log" -a
+        git commit -m ":star: 签到成功" -a
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
