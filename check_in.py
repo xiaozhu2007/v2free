@@ -43,7 +43,7 @@ class CheckIn(object):
         }
         response = self.client.post(self.sign_url, headers=headers)
 
-        logging.info(self.masked_username + "\t" + response.json()["msg"] + "\t" + response.json()["unflowtraffic"])
+        logging.info(self.masked_username + "\t" + response.json()["msg"] + "\t" + str(response.json()["unflowtraffic"]))
 
 
 if __name__ == "__main__":
