@@ -25,10 +25,9 @@ class CheckIn(object):
             email[dot_index:length].rjust(length - at_index - 2, '*')
         return masked_email
 
-    # 谷歌浏览器输入 about:version 获取本机 User-Agent
     def check_in(self):
         headers = {
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36",
             "Referer": "https://w1.v2free.top/auth/login",
         }
         data = {
@@ -39,12 +38,12 @@ class CheckIn(object):
         self.client.post(self.login_url, data=data, headers=headers)
 
         headers = {
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36",
             "Referer": "https://w1.v2free.top/user",
         }
         response = self.client.post(self.sign_url, headers=headers)
 
-        logging.info(self.masked_username + "\t" + response.json()["msg"])
+        logging.info(self.masked_username + "\t" + response.json()["msg"] + "\t" + response.json()["unflowtraffic"])
 
 
 if __name__ == "__main__":
