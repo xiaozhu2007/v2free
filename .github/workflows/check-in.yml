@@ -7,7 +7,7 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
   schedule:
-    - cron: '23 3 * * *'
+    - cron: '5 0 * * *' # UTC+8: 北京时间上午08点05分
 
 permissions:
   actions: write
@@ -43,31 +43,31 @@ jobs:
         user_list=()
         pwd_list=()
 
-        IFS=","
+        IFS="," # 分隔符
 
         for u in ${user[*]}
         do
-        user_list[${#user_list[*]}]=${u}
+          user_list[${#user_list[*]}]=${u}
         done
 
         for p in ${pwd[*]}
         do
-        pwd_list[${#pwd_list[*]}]=${p}
+          pwd_list[${#pwd_list[*]}]=${p}
         done
 
         user_num=${#user_list[*]}
         pwd_num=${#pwd_list[*]}
 
         if [ $user_num != $pwd_num ];then
-        echo "账号和密码个数不对应"
-        exit 1
+          echo "账号和密码个数不对应"
+          exit 1
         else
-        echo "共有 $user_num 个账号，即将开始签到"
+          echo "共有 $user_num 个账号，开始签到！"
         fi
 
         for ((i=0;i<$user_num;i++))
         do
-        python3 check_in.py --username ${user_list[$i]} --password ${pwd_list[$i]}
+          python3 check_in.py --username ${user_list[$i]} --password ${pwd_list[$i]}
         done
     - name: Commit files
       run: |
