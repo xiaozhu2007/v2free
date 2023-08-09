@@ -28,14 +28,14 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Setup Python
+    - name: 设置 Python 环境
       uses: actions/setup-python@v4.7.0
       
-    - name: requirements
+    - name: 安装依赖
       run: |
         pip3 install -r requirements.txt
         
-    - name: Checkin
+    - name: 签到主进程
       run: |
         user='${{ secrets.USER }}'
         pwd='${{ secrets.PWD }}'
@@ -62,20 +62,20 @@ jobs:
           echo "账号和密码个数不对应"
           exit 1
         else
-          echo "共有 $user_num 个账号，开始签到！"
+          echo "共有 $user_num 个账号，即将开始签到！"
         fi
 
         for ((i=0;i<$user_num;i++))
         do
           python3 check_in.py --username ${user_list[$i]} --password ${pwd_list[$i]}
         done
-    - name: Commit files
+    - name: Git 提交 Commit
       run: |
         git config --global user.email 3356136957@qq.com
-        git config --global user.name 签到机器人
+        git config --global user.name HelloTools-bot
         git add .
         git commit -m ":star: 签到成功" -a
-    - name: Push changes
+    - name: Git 提交到主仓库
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
