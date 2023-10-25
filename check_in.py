@@ -7,8 +7,8 @@ import requests
 
 class CheckIn(object):
     client = requests.Session()
-    login_url = "https://w1.v2free.top/auth/login"
-    sign_url = "https://w1.v2free.top/user/checkin"
+    login_url = "https://v2free.org/auth/login"
+    sign_url = "https://v2free.org/user/checkin"
 
     def __init__(self, username, password):
         self.username = username
@@ -26,21 +26,26 @@ class CheckIn(object):
 
     def check_in(self):
         headers = {
-            "User-Agent": "Mozilla/5.0 (Windows NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36",
+            "Host": "w1.v2free.top",
+            "Origin": "https://w1.v2free.top",
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36",
             "Referer": "https://w1.v2free.top/auth/login",
+            "X-Requested-With": "XMLHttpRequest",
         }
         data = {
             "email": self.username,
             "passwd": self.password,
             "code": "",
+            "remember_me": "week",
         }
         resp = self.client.post(self.login_url, data=data, headers=headers)
         ##### DEBUG #####
         print(resp.cookies)
         ##### DEBUG #####
         headers = {
-            "User-Agent": "Mozilla/5.0 (Windows NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36",
+            "User-Agent": "Mozilla/5.0 (Windows NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36",
             "Referer": "https://w1.v2free.top/user",
+            "X-Requested-With": "XMLHttpRequest",
         }
         response = self.client.post(self.sign_url, cookies=resp.cookies, headers=headers)
         ##### DEBUG #####
