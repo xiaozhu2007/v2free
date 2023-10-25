@@ -46,12 +46,11 @@ class CheckIn(object):
         ##### DEBUG #####
         headers = {
             "Accept": "application/json, text/javascript, */*; q=0.01",
-            "Cookies": new_cookie,
             "User-Agent": "Mozilla/5.0 (Windows NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36",
             "Referer": "https://v2free.org/user",
             "X-Requested-With": "XMLHttpRequest",
         }
-        response = self.client.post(self.sign_url, headers=headers)
+        response = self.client.post(self.sign_url, cookies=new_cookie, headers=headers)
         ##### DEBUG #####
         print(response.text)
         ##### DEBUG #####
