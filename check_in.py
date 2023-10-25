@@ -39,16 +39,19 @@ class CheckIn(object):
             "remember_me": "week",
         }
         resp = self.client.post(self.login_url, data=data, headers=headers)
+        #把返回的cookie转换为字典
+        new_cookie = requests.utils.dict_from_cookiejar(resp.cookies)
         ##### DEBUG #####
-        print(resp.cookies)
+        print(new_cookie)
         ##### DEBUG #####
         headers = {
             "Accept": "application/json, text/javascript, */*; q=0.01",
+            "Cookies": new_cookie,
             "User-Agent": "Mozilla/5.0 (Windows NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36",
             "Referer": "https://v2free.org/user",
             "X-Requested-With": "XMLHttpRequest",
         }
-        response = self.client.post(self.sign_url, cookies=resp.cookies, headers=headers)
+        response = self.client.post(self.sign_url, headers=headers)
         ##### DEBUG #####
         print(response.text)
         ##### DEBUG #####
