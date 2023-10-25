@@ -7,8 +7,8 @@ import requests
 
 class CheckIn(object):
     client = requests.Session()
-    login_url = "https://v2free.org/auth/login"
-    sign_url = "https://v2free.org/user/checkin"
+    login_url = "https://w1.v2free.top/auth/login"
+    sign_url = "https://w1.v2free.top/user/checkin"
 
     def __init__(self, username, password):
         self.username = username
@@ -26,35 +26,21 @@ class CheckIn(object):
 
     def check_in(self):
         headers = {
-            "Host": "v2free.org",
-            "Origin": "https://v2free.org",
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36",
-            "Referer": "https://v2free.org/auth/login",
-            "X-Requested-With": "XMLHttpRequest",
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36",
+            "Referer": "https://w1.v2free.top/auth/login",
         }
         data = {
             "email": self.username,
             "passwd": self.password,
             "code": "",
-            "remember_me": "week",
         }
-        resp = self.client.post(self.login_url, data=data, headers=headers)
-        #把返回的cookie转换为字典
-        new_cookie = requests.utils.dict_from_cookiejar(resp.cookies)
-        ##### DEBUG #####
-        print(new_cookie)
-        ##### DEBUG #####
+        self.client.post(self.login_url, data=data, headers=headers)
         headers = {
-            "Accept": "application/json, text/javascript, */*; q=0.01",
-            "User-Agent": "Mozilla/5.0 (Windows NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36",
-            "Referer": "https://v2free.org/user",
-            "X-Requested-With": "XMLHttpRequest",
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36",
+            "Referer": "https://w1.v2free.top/user",
         }
-        response = self.client.post(self.sign_url, cookies=new_cookie, headers=headers)
-        ##### DEBUG #####
-        print(response.text)
-        ##### DEBUG #####
-        logging.info(self.masked_username + " " + "获得了 未知 流量.") # response.json()["msg"]
+        response = self.client.post(self.sign_url, headers=headers)
+        logging.info(self.masked_username + " " + response.json()["msg"])
 
 
 if __name__ == "__main__":
