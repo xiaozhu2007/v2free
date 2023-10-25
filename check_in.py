@@ -54,7 +54,7 @@ class CheckIn(object):
         ##### DEBUG #####
         print(response.text)
         ##### DEBUG #####
-        # logging.info(self.masked_username + " " + response.json()["msg"])
+        logging.info(self.masked_username + " " + "获得了 未知 流量.") # response.json()["msg"]
 
 
 if __name__ == "__main__":
