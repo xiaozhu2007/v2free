@@ -26,10 +26,10 @@ class CheckIn(object):
 
     def check_in(self):
         headers = {
-            "Host": "w1.v2free.top",
-            "Origin": "https://w1.v2free.top",
+            "Host": "v2free.org",
+            "Origin": "https://v2free.org",
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36",
-            "Referer": "https://w1.v2free.top/auth/login",
+            "Referer": "https://v2free.org/auth/login",
             "X-Requested-With": "XMLHttpRequest",
         }
         data = {
@@ -44,7 +44,7 @@ class CheckIn(object):
         ##### DEBUG #####
         headers = {
             "User-Agent": "Mozilla/5.0 (Windows NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36",
-            "Referer": "https://w1.v2free.top/user",
+            "Referer": "https://v2free.org/user",
             "X-Requested-With": "XMLHttpRequest",
         }
         response = self.client.post(self.sign_url, cookies=resp.cookies, headers=headers)
