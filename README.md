@@ -9,8 +9,4 @@ VFree 自动签到（多账号支持）参考 xiangxingxing/v2free_auto_sign
 
 ---
 
-Fork 之后不要开 PullRequest !!!
-
-Fork 之后不要开 PullRequest !!!
-
-Fork 之后不要开 PullRequest !!!
+2024-01-01 现在需要验证码验证了，推荐使用我们的[订阅链接](https://www.against-ddos.eu.org/ClashConfig/index.yml)（或者[这个链接](https://www.against-ddos.eu.org/ClashConfig/socks5.yml)）
